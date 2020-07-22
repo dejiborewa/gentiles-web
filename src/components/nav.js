@@ -1,8 +1,13 @@
 import React, { useState } from 'react'
 import { Link } from 'gatsby'
 
-export default function Nav() {
-  const [width, setWidth] = useState(0) // real-time width
+export default function Nav() {  // real-time width
+  const [width, setWidth] = useState((function currentWidth() {
+    if (typeof window !== 'undefined') {
+        return document.documentElement.clientWidth
+      }
+    }())
+  ) 
 
   const checkWidth = () => {
     setWidth(document.documentElement.clientWidth)
@@ -15,7 +20,7 @@ export default function Nav() {
   const displaySidebar = () => {
     document.getElementById('sidebar').style.display = 'flex'
   }
-  
+
   return (
     <div className='row top'>
       <div>
